@@ -8,6 +8,7 @@ import static spark.Spark.*;
 public class App {
   public static void main(String[] args) {
     String layout = "templates/layout.vtl";
+    staticFileLocation("/public");
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
@@ -22,7 +23,7 @@ public class App {
       model.put("animal", request.queryParams("animal"));
       model.put("exclamation", request.queryParams("exclamation"));
       model.put("verb", request.queryParams("verb"));
-      model.put("noun", request.queryParams("noun"));      
+      model.put("noun", request.queryParams("noun"));
       model.put("template", "templates/story.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
